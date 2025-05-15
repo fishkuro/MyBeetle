@@ -1,17 +1,187 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CAB91B1A-DCF9-4ED2-9F4B-AA20068A6A2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Beetle</RootNamespace>
     <AssemblyName>Beetle</AssemblyName>
-    <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
-    <TargetFramework>net40</TargetFramework>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
-  <PropertyGroup>
-    <LangVersion>2</LangVersion>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup />
-  <ItemGroup />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MessageAttribute.cs" />
+    <Compile Include="CommandAttribute.cs" />
+    <Compile Include="SerializableAttribute.cs" />
+    <Compile Include="IgnoreAttribute.cs" />
+    <Compile Include="HandlerAttribute.cs" />
+    <Compile Include="ProtocolAttribute.cs" />
+    <Compile Include="EncryptAttribute.cs" />
+    <Compile Include="ValidateAttribute.cs" />
+    <Compile Include="LogAttribute.cs" />
+    <Compile Include="AliasAttribute.cs" />
+    <Compile Include="EventAttribute.cs" />
+    <Compile Include="Beetle\ArraySegmentStream.cs" />
+    <Compile Include="Beetle\ByteArrayPool.cs" />
+    <Compile Include="Beetle\ByteArraySegment.cs" />
+    <Compile Include="Beetle\BytesMessage.cs" />
+    <Compile Include="Beetle\ChannelCreatingArgs.cs" />
+    <Compile Include="Beetle\ChannelDisposedEventArgs.cs" />
+    <Compile Include="Beetle\ChannelDisposedQueue.cs" />
+    <Compile Include="Beetle\ChannelErrorEventArgs.cs" />
+    <Compile Include="Beetle\ChannelEventArgs.cs" />
+    <Compile Include="Beetle\ChannelReceiveEventArgs.cs" />
+    <Compile Include="Beetle\ChannelStatus.cs" />
+    <Compile Include="Beetle\ConfigSection.cs" />
+    <Compile Include="Beetle\CounterMessage.cs" />
+    <Compile Include="Beetle\CreateChannelArgs.cs" />
+    <Compile Include="Beetle\DataReader.cs" />
+    <Compile Include="Beetle\DataWriter.cs" />
+    <Compile Include="Beetle\DefaultIPFilter.cs" />
+    <Compile Include="Beetle\DetectTimeoutHandler.cs" />
+    <Compile Include="Beetle\EventCallBackHandler.cs" />
+    <Compile Include="Beetle\EventCallBackHandlerArgs.cs" />
+    <Compile Include="Beetle\EventChannelConnected.cs" />
+    <Compile Include="Beetle\EventChannelDisposed.cs" />
+    <Compile Include="Beetle\EventChannelError.cs" />
+    <Compile Include="Beetle\EventChannglCreating.cs" />
+    <Compile Include="Beetle\EventDataReceive.cs" />
+    <Compile Include="Beetle\EventMessageWriter.cs" />
+    <Compile Include="Beetle\EventPacketRecievMessage.cs" />
+    <Compile Include="Beetle\EventSendMessageCompleted.cs" />
+    <Compile Include="Beetle\EventTcpServerError.cs" />
+    <Compile Include="Beetle\ICallBackMessage.cs" />
+    <Compile Include="Beetle\IChannel.cs" />
+    <Compile Include="Beetle\ICounterMessage.cs" />
+    <Compile Include="Beetle\IDataBlock.cs" />
+    <Compile Include="Beetle\IDataReader.cs" />
+    <Compile Include="Beetle\IDataWriter.cs" />
+    <Compile Include="Beetle\IIPFiler.cs" />
+    <Compile Include="Beetle\IMessage.cs" />
+    <Compile Include="Beetle\IObjectReset.cs" />
+    <Compile Include="Beetle\IpItem.cs" />
+    <Compile Include="Beetle\IServerHandler.cs" />
+    <Compile Include="Beetle\LICENSE.cs" />
+    <Compile Include="Beetle\LogicException.cs" />
+    <Compile Include="Beetle\LRUDetect.cs" />
+    <Compile Include="Beetle\NetTcpException.cs" />
+    <Compile Include="Beetle\Nodes.cs" />
+    <Compile Include="Beetle\ObjectArraySegment.cs" />
+    <Compile Include="Beetle\ObjectPool.cs" />
+    <Compile Include="Beetle\OnlineSegment.cs" />
+    <Compile Include="Beetle\Package.cs" />
+    <Compile Include="Beetle\PacketRecieveMessagerArgs.cs" />
+    <Compile Include="Beetle\PoolSection.cs" />
+    <Compile Include="Beetle\ReadObjectInfo.cs" />
+    <Compile Include="Beetle\SendMessageCompletedArgs.cs" />
+    <Compile Include="Beetle\ServerBase.cs" />
+    <Compile Include="Beetle\ServerCollection.cs" />
+    <Compile Include="Beetle\ServerFactorySection.cs" />
+    <Compile Include="Beetle\ServerImpl.cs" />
+    <Compile Include="Beetle\ServerNode.cs" />
+    <Compile Include="Beetle\ServerSection.cs" />
+    <Compile Include="Beetle\StringMessage.cs" />
+    <Compile Include="Beetle\Task.cs" />
+    <Compile Include="Beetle\TcpServer.cs" />
+    <Compile Include="Beetle\TcpServerErrorArgs.cs" />
+    <Compile Include="Beetle\TcpUtils.cs" />
+    <Compile Include="Beetle\WriteBlock.cs" />
+    <Compile Include="BeetleMessageBase.cs" />
+    <Compile Include="SocketAsyncContext.cs" />
+    <Compile Include="DataSegmentPool.cs" />
+    <Compile Include="SocketSendBuffer.cs" />
+    <Compile Include="AsyncEventDispatcher.cs" />
+    <Compile Include="StreamInputHandler.cs" />
+    <Compile Include="StreamOutputHandler.cs" />
+    <Compile Include="SocketSessionContext.cs" />
+    <Compile Include="SocketConnectionFilter.cs" />
+    <Compile Include="RemoteAddressHelper.cs" />
+    <Compile Include="PacketStreamAdapter.cs" />
+    <Compile Include="MessageWriter.cs" />
+    <Compile Include="CryptoProvider.cs" />
+    <Compile Include="ProtocolEncoder.cs" />
+    <Compile Include="SocketTransportAdapter.cs" />
+    <Compile Include="EventDrivenSocket.cs" />
+    <Compile Include="SocketReceiveEventArgs.cs" />
+    <Compile Include="AsyncSendWorker.cs" />
+    <Compile Include="ConnectionThrottle.cs" />
+    <Compile Include="HeartbeatMonitor.cs" />
+    <Compile Include="BufferedPacketStream.cs" />
+    <Compile Include="SocketKeepAliveManager.cs" />
+    <Compile Include="ProtocolPacketBuilder.cs" />
+    <Compile Include="ProtocolPacketParser.cs" />
+    <Compile Include="TransmissionController.cs" />
+    <Compile Include="AsyncWorkerScheduler.cs" />
+    <Compile Include="ConnectionExtensions.cs" />
+    <Compile Include="DataFrameSegment.cs" />
+    <Compile Include="ChannelMessageRouter.cs" />
+    <Compile Include="ConnectionSessionStore.cs" />
+    <Compile Include="ProtocolHeaderParser.cs" />
+    <Compile Include="SocketAsyncControl.cs" />
+    <Compile Include="SessionIdentityBinder.cs" />
+    <Compile Include="BinaryMessageFrame.cs" />
+    <Compile Include="ConnectionErrorHandler.cs" />
+    <Compile Include="OutboundQueueManager.cs" />
+    <Compile Include="BeetleTcpClient.cs" />
+    <Compile Include="ClientTokenSession.cs" />
+    <Compile Include="SocketBufferSegment.cs" />
+    <Compile Include="AsyncSocketReader.cs" />
+    <Compile Include="Clients\AsnyPool.cs" />
+    <Compile Include="Clients\AsynNode.cs" />
+    <Compile Include="Clients\ISyncChannel.cs" />
+    <Compile Include="Clients\NodeStatus.cs" />
+    <Compile Include="Clients\SyncChannel.cs" />
+    <Compile Include="Clients\SyncNode.cs" />
+    <Compile Include="Clients\SyncPool.cs" />
+    <Compile Include="Controller\ActionContext.cs" />
+    <Compile Include="Controller\AsyncDelegate.cs" />
+    <Compile Include="Controller\ControllerError.cs" />
+    <Compile Include="Controller\ControllerServer.cs" />
+    <Compile Include="Controller\EventFindHandler.cs" />
+    <Compile Include="Controller\FastMethodHandler.cs" />
+    <Compile Include="Controller\FilterAttribute.cs" />
+    <Compile Include="Controller\GetValueHandler.cs" />
+    <Compile Include="Controller\ObjectInstanceHandler.cs" />
+    <Compile Include="Controller\SetValueHandler.cs" />
+    <Compile Include="Controller\SkipFilterAttribute.cs" />
+    <Compile Include="Controller\UseThreadPool.cs" />
+    <Compile Include="MessageReceivedEventArgs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\EofPackage.cs" />
+    <Compile Include="Protocol\SizePackage.cs" />
+    <Compile Include="MessageStream.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

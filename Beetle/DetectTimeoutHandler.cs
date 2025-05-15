@@ -34,7 +34,7 @@ namespace Beetle
 				{
 					if (tickCount - onlineSegment_0.Channels[i].TickCount >= TcpUtils.TimeOutms)
 					{
-						((Class40)onlineSegment_0.Channels[i]).string_2 = "Request Timeout!";
+						((ConnectionSessionStore)onlineSegment_0.Channels[i]).string_2 = "Request Timeout!";
 						onlineSegment_0.Channels[i].Dispose();
 					}
 				}

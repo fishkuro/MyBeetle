@@ -29,7 +29,7 @@ namespace Beetle
 		{
 			if (!LittleEndian)
 			{
-				value = Class11.smethod_0(value);
+				value = DataSegmentPool.smethod_0(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -42,7 +42,7 @@ namespace Beetle
 		{
 			if (!LittleEndian)
 			{
-				value = Class11.smethod_2(value);
+				value = DataSegmentPool.smethod_2(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -55,7 +55,7 @@ namespace Beetle
 		{
 			if (!LittleEndian)
 			{
-				value = Class11.smethod_4(value);
+				value = DataSegmentPool.smethod_4(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{

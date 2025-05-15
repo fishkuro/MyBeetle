@@ -53,7 +53,7 @@ namespace Beetle
 			ChannelDisposedEventArgs channelDisposedEventArgs = method_4();
 			while (channelDisposedEventArgs != null && Environment.TickCount - channelDisposedEventArgs.int_0 > channelDisposedEventArgs.Delay)
 			{
-				((Class40)channelDisposedEventArgs.Channel).method_16();
+				((ConnectionSessionStore)channelDisposedEventArgs.Channel).method_16();
 				channelDisposedEventArgs.Channel = null;
 				method_3();
 				channelDisposedEventArgs = method_4();

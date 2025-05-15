@@ -113,7 +113,7 @@ namespace Beetle
 			short num = BitConverter.ToInt16(byte_0, 0);
 			if (!bool_0)
 			{
-				num = Class11.smethod_0(num);
+				num = DataSegmentPool.smethod_0(num);
 			}
 			return num;
 		}
@@ -124,7 +124,7 @@ namespace Beetle
 			int num = BitConverter.ToInt32(byte_0, 0);
 			if (!bool_0)
 			{
-				num = Class11.smethod_2(num);
+				num = DataSegmentPool.smethod_2(num);
 			}
 			return num;
 		}
@@ -135,7 +135,7 @@ namespace Beetle
 			long num = BitConverter.ToInt64(byte_0, 0);
 			if (!bool_0)
 			{
-				num = Class11.smethod_4(num);
+				num = DataSegmentPool.smethod_4(num);
 			}
 			return num;
 		}
@@ -146,7 +146,7 @@ namespace Beetle
 			ushort num = BitConverter.ToUInt16(byte_0, 0);
 			if (!bool_0)
 			{
-				num = Class11.smethod_1(num);
+				num = DataSegmentPool.smethod_1(num);
 			}
 			return num;
 		}
@@ -157,7 +157,7 @@ namespace Beetle
 			uint num = BitConverter.ToUInt32(byte_0, 0);
 			if (!bool_0)
 			{
-				num = Class11.smethod_3(num);
+				num = DataSegmentPool.smethod_3(num);
 			}
 			return num;
 		}
@@ -168,7 +168,7 @@ namespace Beetle
 			ulong num = BitConverter.ToUInt64(byte_0, 0);
 			if (!bool_0)
 			{
-				num = Class11.smethod_5(num);
+				num = DataSegmentPool.smethod_5(num);
 			}
 			return num;
 		}
@@ -226,7 +226,7 @@ namespace Beetle
 			{
 				return null;
 			}
-			return Stream0.smethod_0().method_2(length, Coding, stream_0);
+			return MessageStream.smethod_0().method_2(length, Coding, stream_0);
 		}
 
 		public string ReadString()

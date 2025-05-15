@@ -10,23 +10,23 @@ namespace Beetle
 	{
 		internal static bool bool_0;
 
-		private static Class8 class8_0;
+		private static SocketBufferSegment class8_0;
 
 		internal static object object_0;
 
 		internal static object object_1;
 
-		internal static Class41 class41_0;
+		internal static ProtocolHeaderParser class41_0;
 
-		internal static Class7 class7_0;
+		internal static ClientTokenSession class7_0;
 
-		internal static Class7 class7_1;
+		internal static ClientTokenSession class7_1;
 
-		private static IList<Class42> ilist_0;
+		private static IList<SocketAsyncControl> ilist_0;
 
-		private static IList<Class42> ilist_1;
+		private static IList<SocketAsyncControl> ilist_1;
 
-		private static IList<Class42> ilist_2;
+		private static IList<SocketAsyncControl> ilist_2;
 
 		public static int SocketDespatchSleepTime;
 
@@ -95,12 +95,12 @@ namespace Beetle
 		static TcpUtils()
 		{
 			bool_0 = false;
-			class8_0 = new Class8();
+			class8_0 = new SocketBufferSegment();
 			object_0 = new object();
 			object_1 = new object();
-			ilist_0 = new List<Class42>();
-			ilist_1 = new List<Class42>();
-			ilist_2 = new List<Class42>();
+			ilist_0 = new List<SocketAsyncControl>();
+			ilist_1 = new List<SocketAsyncControl>();
+			ilist_2 = new List<SocketAsyncControl>();
 			SocketDespatchSleepTime = 10;
 			WorkDespatchSleepTime = 10;
 			EnabledReceiveQueue = true;
@@ -159,23 +159,23 @@ namespace Beetle
 		{
 			Clean();
 			Connections = maxconnections;
-			class41_0 = new Class41(Connections, ReceiveBufferLength);
+			class41_0 = new ProtocolHeaderParser(Connections, ReceiveBufferLength);
 			smethod_2(Connections);
 			for (int i = 0; i < senddespatchs; i++)
 			{
-				Class42 @class = new Class42();
+				SocketAsyncControl @class = new SocketAsyncControl();
 				@class.int_0 = SocketDespatchSleepTime;
 				ilist_0.Add(@class);
 			}
 			for (int j = 0; j < receivedespatch; j++)
 			{
-				Class42 @class = new Class42();
+				SocketAsyncControl @class = new SocketAsyncControl();
 				@class.int_0 = SocketDespatchSleepTime;
 				ilist_1.Add(@class);
 			}
 			for (int k = 0; k < workdespatchs; k++)
 			{
-				Class42 @class = new Class42();
+				SocketAsyncControl @class = new SocketAsyncControl();
 				@class.int_0 = WorkDespatchSleepTime;
 				ilist_2.Add(@class);
 			}
@@ -192,8 +192,8 @@ namespace Beetle
 			{
 				class7_0.method_4();
 			}
-			class7_1 = new Class7(int_4, SendBufferLength);
-			class7_0 = new Class7(int_4, ReceiveBufferLength);
+			class7_1 = new ClientTokenSession(int_4, SendBufferLength);
+			class7_0 = new ClientTokenSession(int_4, ReceiveBufferLength);
 		}
 
 		public static void Setup(int maxconnections, int bufferpools, int despatchs)
@@ -216,21 +216,21 @@ namespace Beetle
 
 		private static void smethod_3()
 		{
-			foreach (Class42 item in ilist_0)
+			foreach (SocketAsyncControl item in ilist_0)
 			{
 				item.Dispose();
 			}
-			foreach (Class42 item2 in ilist_1)
+			foreach (SocketAsyncControl item2 in ilist_1)
 			{
 				item2.Dispose();
 			}
-			foreach (Class42 item3 in ilist_2)
+			foreach (SocketAsyncControl item3 in ilist_2)
 			{
 				item3.Dispose();
 			}
 		}
 
-		internal static Class42 smethod_4()
+		internal static SocketAsyncControl smethod_4()
 		{
 			lock (ilist_0)
 			{
@@ -243,7 +243,7 @@ namespace Beetle
 			}
 		}
 
-		internal static Class42 smethod_5()
+		internal static SocketAsyncControl smethod_5()
 		{
 			lock (ilist_1)
 			{
@@ -264,7 +264,7 @@ namespace Beetle
 		public static IList<int> GetSendDespatchStatus()
 		{
 			List<int> list = new List<int>();
-			foreach (Class42 item in ilist_0)
+			foreach (SocketAsyncControl item in ilist_0)
 			{
 				list.Add(item.method_2());
 			}
@@ -274,7 +274,7 @@ namespace Beetle
 		public static IList<int> GetReceiveDespatchStatus()
 		{
 			List<int> list = new List<int>();
-			foreach (Class42 item in ilist_1)
+			foreach (SocketAsyncControl item in ilist_1)
 			{
 				list.Add(item.method_2());
 			}
@@ -322,7 +322,7 @@ namespace Beetle
 			Setup(maxonlineconnections, 1, 1);
 		}
 
-		internal static Class42 smethod_6()
+		internal static SocketAsyncControl smethod_6()
 		{
 			lock (ilist_2)
 			{

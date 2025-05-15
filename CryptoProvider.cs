@@ -1,0 +1,12 @@
+using System.Security.Cryptography;
+
+internal class CryptoProvider
+{
+	internal static string string_0 = "hn1//PZnJ+RTNMXQ+MkO6QwQJqnn3RqN9ou6CzyfMrZWjXY9HyYCHRZ3CSvJyMY1qvMp1J9trG64OxZeCVcYGpObKBlmULBtct+eQl7GpmLt7sW4mdDuXyYWKu7XJjY893CstYfSgZa9qJnxayzFELm0iQbGDtho3l/Kp1MxUKteGuVzjquNBHG3HeJKbtv1uItsbIZ7vsIwmYb26IybmgjrUY7lPR62sbWxQr+v44PgM6AW4P1g4Q9Fs3e5Eer6O9WW1VeBO9XxxhIpvj6ardz8oC6rr5HNii7ip/k9WkSr3FT9sCkrtF4KnD7tnlkFluByl9Yk0IObLEiaZX9ZxYeXjd5jqITrieIJBe9IoCJc+zakXnuDoVWG0Wrxg1/d4QIJAHqo+6lwjPJAW9j7zyzbCSoL/k5YBrEWn92HYhZjW1aFh3SGVJ8wNgnmLj";
+
+	[ProtocolAttribute]
+	public static RSACryptoServiceProvider smethod_0()
+	{
+		return new RSACryptoServiceProvider(2048);
+	}
+}

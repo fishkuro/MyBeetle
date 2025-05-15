@@ -9,7 +9,7 @@ namespace Beetle
 {
 	public abstract class Package : IDisposable
 	{
-		private Dictionary<long, Class38> dictionary_0 = new Dictionary<long, Class38>();
+		private Dictionary<long, ChannelMessageRouter> dictionary_0 = new Dictionary<long, ChannelMessageRouter>();
 
 		private bool bool_0 = true;
 
@@ -17,7 +17,7 @@ namespace Beetle
 
 		public int BufferCount;
 
-		private Class25 class25_0 = Class25.smethod_6();
+		private SocketReceiveEventArgs class25_0 = SocketReceiveEventArgs.smethod_6();
 
 		public EventPacketRecievMessage ReceiveMessage;
 
@@ -91,7 +91,7 @@ namespace Beetle
 			ReadSinglePackage = false;
 		}
 
-		internal void method_0(long long_0, Class38 class38_0)
+		internal void method_0(long long_0, ChannelMessageRouter class38_0)
 		{
 			lock (dictionary_0)
 			{
@@ -102,12 +102,12 @@ namespace Beetle
 		public Package(IChannel channel)
 		{
 			LittleEndian = channel.LittleEndian;
-			((Class40)channel).package_0 = this;
+			((ConnectionSessionStore)channel).package_0 = this;
 			Channel = channel;
 			Coding = channel.Coding;
-			((Class40)channel).eventDataReceive_0 = ImportReceiveData;
-			((Class40)channel).eventMessageWriter_0 = MessageWrite;
-			((Class40)channel).eventMessageWriter_1 = MessageWrited;
+			((ConnectionSessionStore)channel).eventDataReceive_0 = ImportReceiveData;
+			((ConnectionSessionStore)channel).eventMessageWriter_0 = MessageWrite;
+			((ConnectionSessionStore)channel).eventMessageWriter_1 = MessageWrited;
 			packetRecieveMessagerArgs_0.Channel = channel;
 			CreateWriterReader();
 		}
@@ -136,15 +136,15 @@ namespace Beetle
 
 		public void CreateWriterReader()
 		{
-			Writer = new Stream0(TcpUtils.class7_1);
+			Writer = new MessageStream(TcpUtils.class7_1);
 			Writer.LittleEndian = LittleEndian;
-			((Stream0)Writer).encoding_0 = Coding;
-			((Stream0)Writer).Channel = (Class40)Channel;
-			idataWriter_0 = new Stream0(TcpUtils.class7_1);
-			((Stream0)idataWriter_0).encoding_0 = Coding;
-			((Stream0)idataWriter_0).Channel = (Class40)Channel;
+			((MessageStream)Writer).encoding_0 = Coding;
+			((MessageStream)Writer).Channel = (ConnectionSessionStore)Channel;
+			idataWriter_0 = new MessageStream(TcpUtils.class7_1);
+			((MessageStream)idataWriter_0).encoding_0 = Coding;
+			((MessageStream)idataWriter_0).Channel = (ConnectionSessionStore)Channel;
 			idataWriter_0.LittleEndian = LittleEndian;
-			if (Channel != null && !class25_0.method_0(((Class40)Channel).int_0) && Channel.Server != null)
+			if (Channel != null && !class25_0.method_0(((ConnectionSessionStore)Channel).int_0) && Channel.Server != null)
 			{
 				method_1();
 			}
@@ -160,13 +160,13 @@ namespace Beetle
 			}
 			finally
 			{
-				((Stream0)idataWriter_0).Reset();
+				((MessageStream)idataWriter_0).Reset();
 			}
 		}
 
 		internal void method_1()
 		{
-			((Class40)Channel).string_2 = "package reset!";
+			((ConnectionSessionStore)Channel).string_2 = "package reset!";
 			Channel.Dispose();
 		}
 
@@ -192,7 +192,7 @@ namespace Beetle
 			}
 			finally
 			{
-				((Stream0)writer).method_5(false);
+				((MessageStream)writer).method_5(false);
 			}
 			method_2(imessage_, null);
 		}
@@ -202,7 +202,7 @@ namespace Beetle
 			if (packetRecieveMessagerArgs_1.Message is ICallBackMessage)
 			{
 				ICallBackMessage callBackMessage = (ICallBackMessage)packetRecieveMessagerArgs_1.Message;
-				Class38 value = null;
+				ChannelMessageRouter value = null;
 				if (dictionary_0.TryGetValue(callBackMessage.MessageID, out value))
 				{
 					lock (dictionary_0)
@@ -239,14 +239,14 @@ namespace Beetle
 		{
 			if (Writer != null)
 			{
-				((Stream0)Writer).Channel = null;
-				((Stream0)Writer).method_5(true);
+				((MessageStream)Writer).Channel = null;
+				((MessageStream)Writer).method_5(true);
 				Writer = null;
 			}
 			if (idataWriter_0 != null)
 			{
-				((Stream0)idataWriter_0).Channel = null;
-				((Stream0)idataWriter_0).method_5(true);
+				((MessageStream)idataWriter_0).Channel = null;
+				((MessageStream)idataWriter_0).method_5(true);
 				idataWriter_0 = null;
 			}
 			dictionary_0.Clear();

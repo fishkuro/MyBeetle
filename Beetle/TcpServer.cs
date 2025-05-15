@@ -17,7 +17,7 @@ namespace Beetle
 
 		private object object_0 = new object();
 
-		private Class45 class45_0;
+		private ConnectionErrorHandler class45_0;
 
 		private int int_0 = 255;
 
@@ -27,9 +27,9 @@ namespace Beetle
 
 		private Socket socket_0;
 
-		private Class23 class23_0;
+		private SocketTransportAdapter class23_0;
 
-		private Queue<Class45> queue_0 = new Queue<Class45>(1024);
+		private Queue<ConnectionErrorHandler> queue_0 = new Queue<ConnectionErrorHandler>(1024);
 
 		private Dictionary<Type, IIPFiler> dictionary_0 = new Dictionary<Type, IIPFiler>();
 
@@ -326,7 +326,7 @@ namespace Beetle
 			EnabledChannelSendCompeletedEvent = false;
 			detectTimeoutHandler_0 = new DetectTimeoutHandler();
 			detectTimeoutHandler_0.Server = this;
-			class23_0 = Class23.smethod_12();
+			class23_0 = SocketTransportAdapter.smethod_12();
 			EnabledReceiveQueue = TcpUtils.EnabledReceiveQueue;
 			EnabledSendQueue = TcpUtils.EnabledSendQueue;
 			EnabledWorkQueue = TcpUtils.EnabledWorkQueue;
@@ -347,7 +347,7 @@ namespace Beetle
 			}
 		}
 
-		private void method_0(Class45 class45_1)
+		private void method_0(ConnectionErrorHandler class45_1)
 		{
 			lock (queue_0)
 			{
@@ -355,7 +355,7 @@ namespace Beetle
 			}
 		}
 
-		private Class45 method_1()
+		private ConnectionErrorHandler method_1()
 		{
 			lock (queue_0)
 			{
@@ -403,7 +403,7 @@ namespace Beetle
 			{
 				dictionary_1.Add(ichannel_0.ClientID, ichannel_0);
 				long_0++;
-				((Class40)ichannel_0).bool_11 = ((Class40)ichannel_0).int_0 > (int)ichannel_0["_data"];
+				((ConnectionSessionStore)ichannel_0).bool_11 = ((ConnectionSessionStore)ichannel_0).int_0 > (int)ichannel_0["_data"];
 			}
 		}
 
@@ -420,14 +420,14 @@ namespace Beetle
 			{
 				try
 				{
-					Class40[] array = new Class40[dictionary_1.Count];
+					ConnectionSessionStore[] array = new ConnectionSessionStore[dictionary_1.Count];
 					dictionary_1.Values.CopyTo(array, 0);
 					return array;
 				}
 				catch (Exception exception_)
 				{
 					method_4(exception_);
-					return new Class40[0];
+					return new ConnectionSessionStore[0];
 				}
 			}
 		}
@@ -470,12 +470,12 @@ namespace Beetle
 		{
 			IChannel[] onlines = GetOnlines();
 			int num = 0;
-			Class40 @class;
+			ConnectionSessionStore @class;
 			while (true)
 			{
 				if (num < onlines.Length)
 				{
-					@class = (Class40)onlines[num];
+					@class = (ConnectionSessionStore)onlines[num];
 					if (long_1 == @class.ClientID || (!string.IsNullOrEmpty(name) && @class.Name == name))
 					{
 						break;
@@ -493,7 +493,7 @@ namespace Beetle
 			try
 			{
 				method_3(ichannel_0);
-				((Class40)ichannel_0).method_14(this);
+				((ConnectionSessionStore)ichannel_0).method_14(this);
 				ichannel_0.ChannelDisposed += OnClientDisposed;
 				if (eventChannelConnected_0 != null)
 				{
@@ -515,7 +515,7 @@ namespace Beetle
 		{
 			try
 			{
-				((Class40)e.Channel).method_14(null);
+				((ConnectionSessionStore)e.Channel).method_14(null);
 				method_2(e.Channel);
 				if (eventChannelDisposed_0 != null)
 				{
@@ -604,7 +604,7 @@ namespace Beetle
 						{
 							method_5(class45_0.socket_0);
 						}
-						Class8.smethod_0(method_6(), dictionary_1.Count);
+						SocketBufferSegment.smethod_0(method_6(), dictionary_1.Count);
 					}
 					else
 					{
@@ -620,7 +620,7 @@ namespace Beetle
 
 		private bool method_8()
 		{
-			return dictionary_1.Count < Class7.int_0;
+			return dictionary_1.Count < ClientTokenSession.int_0;
 		}
 
 		private void method_9(object object_2)
@@ -671,7 +671,7 @@ namespace Beetle
 			{
 				if (socketAsyncEventArgs_0.SocketError == SocketError.Success && !bool_2)
 				{
-					Class45 @class = new Class45();
+					ConnectionErrorHandler @class = new ConnectionErrorHandler();
 					@class.socket_0 = socketAsyncEventArgs_0.AcceptSocket;
 					method_0(@class);
 				}
@@ -687,16 +687,16 @@ namespace Beetle
 			}
 			finally
 			{
-				Class8.smethod_0(method_6(), dictionary_1.Count);
+				SocketBufferSegment.smethod_0(method_6(), dictionary_1.Count);
 				bool_0 = false;
 				socketAsyncEventArgs_0.Completed -= method_10;
 				SocketAsyncEventArgsPools.Push(socketAsyncEventArgs_0);
 			}
 		}
 
-		private void method_12(Class45 class45_1)
+		private void method_12(ConnectionErrorHandler class45_1)
 		{
-			Class40 @class = null;
+			ConnectionSessionStore @class = null;
 			bool flag = true;
 			if (dictionary_0.Count > 0)
 			{
@@ -709,7 +709,7 @@ namespace Beetle
 			}
 			if (flag)
 			{
-				@class = new Class40(class45_1.socket_0);
+				@class = new ConnectionSessionStore(class45_1.socket_0);
 				@class.LittleEndian = LittleEndian;
 				@class.bool_7 = EnabledVariant;
 				method_14(@class);
@@ -792,7 +792,7 @@ namespace Beetle
 		{
 			Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			socket.Connect(endpoint);
-			return new Class40(socket);
+			return new ConnectionSessionStore(socket);
 		}
 
 		public static IChannel CreateClient<T>(string string_1, int port, EventPacketRecievMessage receive) where T : Package
@@ -813,7 +813,7 @@ namespace Beetle
 			}
 			Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 			socket.Connect(endpoint);
-			Class40 @class = new Class40(socket);
+			ConnectionSessionStore @class = new ConnectionSessionStore(socket);
 			@class.SetPackage<T>().ReceiveMessage = receive;
 			return @class;
 		}
@@ -893,7 +893,7 @@ namespace Beetle
 				createChannelArgs.Error = e.SocketError;
 				if (e.SocketError == SocketError.Success)
 				{
-					createChannelArgs.Channel = new Class40(e.AcceptSocket);
+					createChannelArgs.Channel = new ConnectionSessionStore(e.AcceptSocket);
 				}
 				Action<CreateChannelArgs> action = (Action<CreateChannelArgs>)e.UserToken;
 				action(createChannelArgs);
@@ -908,7 +908,7 @@ namespace Beetle
 			}
 		}
 
-		internal void method_14(Class40 class40_0)
+		internal void method_14(ConnectionSessionStore class40_0)
 		{
 			class40_0.int_0 = dictionary_1.Count;
 			class40_0["_data"] = int_0;
@@ -925,7 +925,7 @@ namespace Beetle
 					IChannel[] onlines = GetOnlines();
 					for (int i = 0; i < onlines.Length; i++)
 					{
-						Class40 @class = (Class40)onlines[i];
+						ConnectionSessionStore @class = (ConnectionSessionStore)onlines[i];
 						@class.string_2 = "Server Close!";
 						@class.Dispose();
 					}

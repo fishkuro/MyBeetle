@@ -101,7 +101,7 @@ namespace Beetle
 		{
 			if (!bool_0)
 			{
-				value = Class11.smethod_0(value);
+				value = DataSegmentPool.smethod_0(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -114,7 +114,7 @@ namespace Beetle
 		{
 			if (!bool_0)
 			{
-				value = Class11.smethod_2(value);
+				value = DataSegmentPool.smethod_2(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -127,7 +127,7 @@ namespace Beetle
 		{
 			if (!bool_0)
 			{
-				value = Class11.smethod_4(value);
+				value = DataSegmentPool.smethod_4(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -140,7 +140,7 @@ namespace Beetle
 		{
 			if (!bool_0)
 			{
-				value = Class11.smethod_1(value);
+				value = DataSegmentPool.smethod_1(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -153,7 +153,7 @@ namespace Beetle
 		{
 			if (!bool_0)
 			{
-				value = Class11.smethod_3(value);
+				value = DataSegmentPool.smethod_3(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -166,7 +166,7 @@ namespace Beetle
 		{
 			if (!bool_0)
 			{
-				value = Class11.smethod_5(value);
+				value = DataSegmentPool.smethod_5(value);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
@@ -221,7 +221,7 @@ namespace Beetle
 
 		public void WriteString(string value)
 		{
-			Stream0.smethod_0().method_0(value, Coding, stream_0);
+			MessageStream.smethod_0().method_0(value, Coding, stream_0);
 		}
 
 		public unsafe void WriteUTF(string value)
@@ -229,15 +229,15 @@ namespace Beetle
 			ushort num = 0;
 			if (!string.IsNullOrEmpty(value))
 			{
-				num = (ushort)Stream0.smethod_0().method_1(value, Coding);
+				num = (ushort)MessageStream.smethod_0().method_1(value, Coding);
 			}
-			ushort num2 = (bool_0 ? num : Class11.smethod_1(num));
+			ushort num2 = (bool_0 ? num : DataSegmentPool.smethod_1(num));
 			fixed (byte* ptr = &byte_0[0])
 			{
 				*(ushort*)ptr = num2;
 			}
 			stream_0.Write(byte_0, 0, 2);
-			stream_0.Write(Stream0.smethod_0().byte_0, 0, num);
+			stream_0.Write(MessageStream.smethod_0().byte_0, 0, num);
 		}
 
 		public unsafe void Write(string value)
@@ -245,18 +245,18 @@ namespace Beetle
 			int num = 0;
 			if (!string.IsNullOrEmpty(value))
 			{
-				num = Stream0.smethod_0().method_1(value, Coding);
+				num = MessageStream.smethod_0().method_1(value, Coding);
 			}
 			if (!bool_0)
 			{
-				Class11.smethod_2(num);
+				DataSegmentPool.smethod_2(num);
 			}
 			fixed (byte* ptr = &byte_0[0])
 			{
 				*(int*)ptr = num;
 			}
 			stream_0.Write(byte_0, 0, 4);
-			stream_0.Write(Stream0.smethod_0().byte_0, 0, num);
+			stream_0.Write(MessageStream.smethod_0().byte_0, 0, num);
 		}
 
 		public void Write(ByteArraySegment sagment)
